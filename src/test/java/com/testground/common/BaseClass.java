@@ -5,9 +5,10 @@ import java.time.Duration;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-
 
 public class BaseClass {
 
@@ -28,9 +29,18 @@ public class BaseClass {
 	        options.addArguments("--remote--allow--origin=*");
 	        options.addArguments("headless");
 	        driver=new ChromeDriver(options);
-
-
 	        return driver;}
+	    
+	    public WebDriver getfireFoxDriver() {
+			WebDriverManager.firefoxdriver().setup();
+			FirefoxOptions options = new FirefoxOptions();
+			driver= new FirefoxDriver(options);
+	    	
+	    	return driver;
+	         
+	    	
+	    	
+	    }
 	    
 	    public void launchBrowser(String baseUrl)  {
 

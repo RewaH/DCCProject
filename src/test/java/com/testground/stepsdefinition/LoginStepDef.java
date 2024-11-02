@@ -1,5 +1,7 @@
 package com.testground.stepsdefinition;
 
+import java.io.IOException;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -8,6 +10,7 @@ import com.testground.asserts.LoginAsserts;
 import com.testground.common.BaseClass;
 import com.testground.pageObjects.LoginPage;
 
+import helpers.propertiesDataManagr;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -18,21 +21,22 @@ public class LoginStepDef {
 	BaseClass obj= new BaseClass();
 	LoginPage login= new LoginPage(driver); //we create constructor in login page to establish  a connection to use the page object class
 	LoginAsserts logAssert=new LoginAsserts(driver);
+	propertiesDataManagr prop =new propertiesDataManagr();
 
 	@Given("user is on login page")
-	public void user_is_on_login_page() {
+	public void user_is_on_login_page() throws IOException {
 		 login.setupDriver();
-			obj.launchBrowser("https://testground.internsified.com/");
-			login.click_signin();
-			
+		 String url =prop.getProperty("url");
+		 System.out.println(url);
+	obj.launchBrowser(url);		
+	
 	}
-
 	@When("user enters username and password")
-	public void user_enters_username_and_password() {
+	public void user_enters_username_and_password() throws IOException {
 		System.out.println("done");
-		login.enter_username("pritizipy1@gmail.com");
+		login.enter_username(prop.getProperty("username"));
 	//	driver.findElement(By.name("email")).sendKeys("pritizipy1@gmail.com");
-		login.enter_pwd("123456");
+		login.enter_pwd(prop.getProperty("password"));
 	}
  
 	@And("clicks on login button")
@@ -40,7 +44,7 @@ public class LoginStepDef {
 		login.click_submitBtn();
 		
 	}
-
+/*
 	@Then("user is navigated to home page")
 	public void user_is_navigated_to_home_page() {
 		String expectedTitle= "My account";

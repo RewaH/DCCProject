@@ -10,10 +10,9 @@ public class LoginPage extends BaseClass{
 	static WebDriver driver;
 	BaseClass obj= new BaseClass();
 
-	By signin=By.partialLinkText("Sign");
-	By email= By.name("email");
+	By userName= By.name("username");
 	By password= By.name("password");
-	By submitBtn=By.id("submit-login");
+	By login =By.cssSelector("button[type='button']");
 
 	
 	public LoginPage(WebDriver driver) {
@@ -25,13 +24,9 @@ public class LoginPage extends BaseClass{
 		return driver;
 		
 	}
-	
-	public void click_signin() {
-		driver.findElement(signin).click();
-		
-	}
+
 	public void enter_username(String userName) {
-		driver.findElement(email).sendKeys(userName);
+		driver.findElement(this.userName).sendKeys(userName);
 		
 	}
 	
@@ -40,7 +35,7 @@ public class LoginPage extends BaseClass{
 		
 	}
 	public void click_submitBtn() {
-		driver.findElement(submitBtn).click();
+		driver.findElement(login).click();
 		
 	}
 	public String get_title() {
